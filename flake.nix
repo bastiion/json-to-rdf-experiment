@@ -1,11 +1,8 @@
-# This file is pretty general, and you can adapt it in your project replacing
-# only `name` and `description` below.
-
 {
-  description = "My awesome Rust project";
+  description = "simple rust based concrete json to RDF converter";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.05";
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
@@ -21,9 +18,10 @@
       root = ./.;
       overrides = {
         shell = common: prev: {
-          packages = prev.packages ++ [
-            common.pkgs.rust-analyzer
-            common.pkgs.cargo-watch
+          packages = with common.pkgs; prev.packages ++ [
+            rust-analyzer
+            cargo-watch
+            cargo-edit
           ];
         };
       };
